@@ -1,1 +1,1 @@
-# js-pathofexile-trade-filter-moving
+# Pathofexile trade filter dragging
