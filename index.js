@@ -13,8 +13,6 @@ $("div.filter.full-span").draggable({
 });
 
 function onDragStop(event, ui){
-    console.log(event, ui);
-    //$(event.toElement).closest(".filter-group.expanded").find(".filter-group-body").prepend($(event.target));
     $(event.target).css("width", "100%");
     $(event.target).css("inset", "auto");
 
@@ -24,22 +22,13 @@ function onDragStop(event, ui){
     var min = $($(event.target).find(":input.minmax")[0]).val();
     var max = $($(event.target).find(":input.minmax")[1]).val();
 
-    var innerHTML = $(event.target).find("div.filter-title.filter-title-clickable").html();
-
-    $(event.toElement).closest(".filter-group.expanded").find(".multiselect__option span:contains('"+ text + "')").trigger("click");
-
-    console.log(firstText);
-
-    var obj = {
-        text,
-        firstText,
-        min,
-        max,
-        trimmedStr,
-        innerHTML
-    };
-
-    console.log(obj);
+    $(event.toElement).closest(".filter-group.expanded").find(".multiselect__option span:contains('"+ text + "')").each(function(index, element)
+    {
+        if($(element)[0].innerText === text && $(element).parent().find("i")[0].innerText === firstText)
+        {
+            $(element).trigger("click");
+        }
+    });
 
     $(event.target).find("button.btn.remove-btn").trigger("click");
 }
